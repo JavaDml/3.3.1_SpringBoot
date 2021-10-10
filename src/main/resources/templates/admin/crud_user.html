@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Roles</th>
+        </tr>
+        <tr th:each = "user: ${Users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getPassword()}"></td>
+            <td th:text="${user.getRolesToString()}"></td>
+
+            <td>
+                <form th:method="GET" th:action="@{/admin/upd_user/{id} (id=${user.getId()}) }">
+                    <input type="submit" value="Update" />
+                </form>
+            </td>
+            <td>
+                <form th:method="POST" th:action="@{/admin/del_user/{id} (id=${user.getId()}) }">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <p></p>
+    ----------Add User----------
+    <form th:method="POST" th:action="@{/admin/add_user}" th:object="${User}">
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <br/>
+        <label for="password">Password</label>
+        <input type="password" th:field="*{password}"  id="password"/>
+        <br/>
+        <input type="checkbox"  th:id="2" name="ROLE_ADMIN" value="ROLE_ADMIN">ADMIN</p>
+        <input type="checkbox"  th:id="1"  name="ROLE_USER" value="ROLE_USER">USER</p>
+        <br/>
+        <input type="submit" value="Add User" />
+    </form>
+    <p></p>
+    <a th:href="@{/logout}">Logout</a>
+
+</body>
+</html>

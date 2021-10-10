@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/upd_current_user}" th:object="${EditingUser}">
+
+    <input type="hidden" th:field="*{id}" id="id"/>
+
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}"  id="password"/>
+    <input type="hidden" name="oldPassword" th:value="*{password}"/>
+    <br/>
+    <input type="checkbox"  th:id="2" name="ROLE_ADMIN" value="ROLE_ADMIN" th:checked="${EditingUser.getRolesToString().contains('ROLE_ADMIN')}">ADMIN</p>
+    <input type="checkbox"  th:id="1"  name="ROLE_USER" value="ROLE_USER" th:checked="${EditingUser.getRolesToString().contains('ROLE_USER')}">USER</p>
+    <br/>
+    <input type="submit" value="Update User" />
+</form>
+
+</body>
+</html>
